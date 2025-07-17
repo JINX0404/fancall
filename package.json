@@ -1,0 +1,21 @@
+{
+  "name": "fancall-landing",
+  "version": "1.0.0",
+  "description": "FanCall - クリエイターとファンを繋ぐ新しいファンダムアプリ",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site, no build required'"
+  },
+  "keywords": [
+    "fancall",
+    "fandom",
+    "creator",
+    "fan"
+  ],
+  "author": "FanCall Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
