@@ -258,9 +258,10 @@ h4 {
 .hero h1 {
     margin-bottom: 32px;
     color: var(--text-primary);
-    font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.01em;
+    font-family: 'Kaisei Decol', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .hero-subtitle {
@@ -343,16 +344,16 @@ h4 {
 }
 
 .message-tagline {
-    font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-    font-weight: 500;
+    font-family: 'Kaisei Decol', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 32px;
     background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 1.4;
-    letter-spacing: 0.02em;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
 }
 
 .message-text {
@@ -389,10 +390,11 @@ h4 {
 }
 
 .mvv-label {
-    font-size: 0.875rem;
+    font-family: 'Kaisei Decol', sans-serif;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-secondary);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     margin-bottom: 16px;
     text-transform: uppercase;
 }
@@ -474,13 +476,13 @@ h4 {
 }
 
 .ceo-quote {
-    font-family: 'Kiwi Maru', sans-serif;
-    font-size: 1.75rem;
-    font-weight: 500;
+    font-family: 'Kaisei Decol', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 24px;
     line-height: 1.6;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
 }
 
 .ceo-body {
