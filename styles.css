@@ -30,15 +30,15 @@
 
 /* Typography */
 body {
-    font-family: 'Zen Maru Gothic', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--text-primary);
-    line-height: 1.8;
+    line-height: 1.75;
     background-color: var(--main-bg);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'palt' 1;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -49,26 +49,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { 
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem); 
-    font-weight: 300;
-    line-height: 1.2;
-    letter-spacing: -0.03em;
-}
-h2 { 
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(2rem, 4.5vw, 3.25rem); 
-    font-weight: 400;
+    font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem); 
+    font-weight: 500;
+    line-height: 1.3;
     letter-spacing: -0.02em;
 }
+h2 { 
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem); 
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
 h3 { 
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: clamp(1.5rem, 3vw, 2.25rem); 
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem); 
     font-weight: 700;
 }
 h4 { 
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem); 
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem); 
     font-weight: 500;
 }
 
@@ -142,12 +142,13 @@ h4 {
 }
 
 .logo {
-    font-family: 'Klee One', serif;
-    font-size: 1.875rem;
-    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 900;
     color: var(--text-primary);
     text-decoration: none;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
 }
 
 .logo span {
@@ -163,14 +164,14 @@ h4 {
 }
 
 .nav a {
-    font-family: 'Zen Maru Gothic', sans-serif;
+    font-family: 'Kosugi Maru', 'M PLUS Rounded 1c', sans-serif;
     color: var(--text-secondary);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400;
     transition: var(--transition);
     position: relative;
     font-size: 0.9375rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
 }
 
 .nav a:hover {
@@ -226,13 +227,23 @@ h4 {
     right: 0;
     bottom: 0;
     z-index: 0;
-    opacity: 0.15;
+    opacity: 0.08;
 }
 
 .hero-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 100%);
 }
 
 .hero-content {
@@ -247,9 +258,9 @@ h4 {
 .hero h1 {
     margin-bottom: 32px;
     color: var(--text-primary);
-    font-family: 'Klee One', 'Noto Serif JP', serif;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 .hero-subtitle {
@@ -268,17 +279,17 @@ h4 {
 }
 
 .btn {
-    padding: 20px 48px;
-    border-radius: var(--radius-sm);
-    font-weight: 500;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: 700;
     text-decoration: none;
     transition: var(--transition);
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 1rem;
-    letter-spacing: 0.08em;
-    font-family: 'Zen Maru Gothic', sans-serif;
+    letter-spacing: 0.04em;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 .btn-primary {
@@ -308,23 +319,40 @@ h4 {
     background: var(--main-bg);
 }
 
+.message-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
 .message-content {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+    text-align: left;
+}
+
+.message-visual {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.message-visual img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .message-tagline {
-    font-family: 'Sawarabi Mincho', 'Noto Serif JP', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 400;
+    font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 32px;
     background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1.4;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.02em;
 }
 
 .message-text {
@@ -370,8 +398,8 @@ h4 {
 }
 
 .mvv-title {
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 1.625rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.5rem;
     color: var(--text-primary);
     margin-bottom: 20px;
     line-height: 1.6;
@@ -446,13 +474,13 @@ h4 {
 }
 
 .ceo-quote {
-    font-family: 'Klee One', serif;
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: 'Kiwi Maru', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 24px;
     line-height: 1.6;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
 }
 
 .ceo-body {
@@ -571,17 +599,19 @@ h4 {
     background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
 }
 
-.domain-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--main-bg);
-    border-radius: 50%;
-    font-weight: 700;
+.domain-icon {
+    width: 80px;
+    height: 80px;
     margin-bottom: 16px;
+    border-radius: 16px;
+    overflow: hidden;
     box-shadow: var(--shadow-sm);
+}
+
+.domain-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .domain-title {
@@ -639,12 +669,12 @@ h4 {
 }
 
 .feature-title {
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 1.375rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.25rem;
     color: var(--text-primary);
     margin-bottom: 12px;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
 }
 
 .feature-subtitle {
@@ -851,12 +881,12 @@ h4 {
 }
 
 .section-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
     color: var(--text-primary);
     margin-bottom: 24px;
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .section-subtitle {
@@ -956,5 +986,14 @@ h4 {
     
     .message-tagline {
         font-size: 1.75rem;
+    }
+    
+    .message-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .message-content {
+        text-align: center;
     }
 }
