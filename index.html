@@ -19,18 +19,20 @@
     <meta name="twitter:title" content="FanCall株式会社">
     <meta name="twitter:description" content="実体験から生まれた、ファンダムの「理想形」">
     
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-new.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@300;400;500;700;900&family=Kiwi+Maru:wght@300;400;500&family=Kosugi+Maru&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Anime.js for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">fan<span>call</span></a>
+                <a href="#" class="logo">FanCall</a>
                 <nav class="nav">
                     <a href="#message">メッセージ</a>
                     <a href="#mvv">私たちの想い</a>
@@ -51,19 +53,47 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-bg">
-            <img src="https://via.placeholder.com/1920x800/E9DFFF/666666?text=Hero+Background" alt="Hero Background">
+            <div class="floating-element" data-speed="0.5">
+                <img src="https://via.placeholder.com/100x100/E9DFFF/ffffff?text=♥" alt="Heart">
+            </div>
+            <div class="floating-element" data-speed="0.3">
+                <img src="https://via.placeholder.com/80x80/FCE4EC/ffffff?text=★" alt="Star">
+            </div>
+            <div class="floating-element" data-speed="0.7">
+                <img src="https://via.placeholder.com/120x120/E9DFFF/ffffff?text=◆" alt="Diamond">
+            </div>
         </div>
         <div class="container">
-            <div class="hero-content animate-on-scroll">
-                <h1>実体験から生まれた、ファンダムの「理想形」</h1>
-                <p class="hero-subtitle">
-                    推しに近づくたび、自分の価値も高まっていく。<br>
-                    オタクでありクリエイターでもある代表の実体験から生まれたFanCallは、<br>
-                    クリエイターとファンが想い合えるファンダムアプリです。
+            <div class="hero-content">
+                <div class="hero-tag">ファンダムの新しいカタチ</div>
+                <h1 class="hero-title">
+                    <span class="text-reveal">推しと繋がる</span>
+                    <span class="text-reveal">新しい体験を</span>
+                </h1>
+                <p class="hero-subtitle text-fade">
+                    クリエイターとファンが本当の意味で繋がれる場所
                 </p>
                 <div class="hero-buttons">
-                    <a href="#features" class="btn btn-primary"><span>▶ サービス紹介へ</span></a>
-                    <a href="#ceo" class="btn btn-secondary"><span>▶ 代表メッセージ</span></a>
+                    <a href="#features" class="btn btn-primary">
+                        <span>アプリを体験する</span>
+                        <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="10000">0</span>+
+                        <span class="stat-label">ユーザー</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="500">0</span>+
+                        <span class="stat-label">クリエイター</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="99">0</span>%
+                        <span class="stat-label">満足度</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,6 +404,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script-new.js"></script>
 </body>
 </html>
