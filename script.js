@@ -1,29 +1,37 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for CTA button
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function() {
-            const preRegSection = document.querySelector('.pre-registration');
-            if (preRegSection) {
-                preRegSection.scrollIntoView({ behavior: 'smooth' });
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
             }
         });
-    }
+    });
 
-    // Form validation and submission
-    const form = document.getElementById('pre-registration-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
+    // Contact form validation and submission
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form values
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const userType = document.getElementById('user-type').value;
-            const genre = document.getElementById('genre').value.trim();
+            const company = this.company.value.trim();
+            const name = this.name.value.trim();
+            const email = this.email.value.trim();
+            const category = this.category.value;
+            const message = this.message.value.trim();
             
             // Basic validation
-            if (!name || !email || !userType) {
+            if (!name || !email || !category || !message) {
                 alert('必須項目を入力してください。');
                 return;
             }
@@ -36,34 +44,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Success message (in production, this would send to a server)
-            alert('事前登録ありがとうございます！\n早期アクセスの準備ができ次第、ご連絡いたします。');
+            alert('お問い合わせありがとうございます。\n内容を確認の上、担当者よりご連絡させていただきます。');
             
             // Reset form
-            form.reset();
+            contactForm.reset();
         });
     }
 
-    // FAQ Accordion
-    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
     
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            const faqItem = this.parentElement;
-            const isActive = faqItem.classList.contains('active');
-            
-            // Close all FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-                item.querySelector('.faq-question').classList.remove('active');
-            });
-            
-            // Open clicked item if it wasn't already active
-            if (!isActive) {
-                faqItem.classList.add('active');
-                this.classList.add('active');
-            }
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.classList.toggle('active');
         });
-    });
+    }
 
     // Intersection Observer for scroll animations
     const observerOptions = {
@@ -74,43 +72,61 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animated');
             }
         });
     }, observerOptions);
     
     // Add elements to observe
-    const animateElements = document.querySelectorAll('.feature-card, .reason-card, .use-case-card, .pricing-card, .team-member');
+    const animateElements = document.querySelectorAll('.stat, .feature, .team-member-card, .news-item, .investor-logo, .contact-item');
     
     animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
 
-    // Add smooth reveal for sections
-    const sections = document.querySelectorAll('section');
-    const sectionObserver = new IntersectionObserver(function(entries) {
+    // Parallax effect for floating shapes
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const shapes = document.querySelectorAll('.floating-shape');
+        
+        shapes.forEach((shape, index) => {
+            const speed = 0.5 + (index * 0.2);
+            shape.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+    // Counter animation for stats
+    function animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 100;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current).toLocaleString();
+        }, 20);
+    }
+
+    // Trigger counter animation when stats are visible
+    const statObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                const statValue = entry.target.querySelector('h3');
+                const targetValue = parseInt(statValue.textContent.replace(/[^0-9]/g, '')) || 100;
+                animateCounter(statValue, targetValue);
             }
         });
-    }, {
-        threshold: 0.05
-    });
-    
-    sections.forEach(section => {
-        sectionObserver.observe(section);
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat').forEach(stat => {
+        statObserver.observe(stat);
     });
 });
 
 // Add loading animation for images
 window.addEventListener('load', function() {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        img.style.opacity = '1';
-    });
+    document.body.classList.add('loaded');
 });
