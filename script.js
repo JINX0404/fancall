@@ -1,57 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight - 20;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Contact form validation and submission
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const company = this.company.value.trim();
-            const name = this.name.value.trim();
-            const email = this.email.value.trim();
-            const category = this.category.value;
-            const message = this.message.value.trim();
-            
-            // Basic validation
-            if (!name || !email || !category || !message) {
-                alert('必須項目を入力してください。');
-                return;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('有効なメールアドレスを入力してください。');
-                return;
-            }
-            
-            // Success message (in production, this would send to a server)
-            alert('お問い合わせありがとうございます。\n内容を確認の上、担当者よりご連絡させていただきます。');
-            
-            // Reset form
-            contactForm.reset();
-        });
-    }
-
-
     // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
@@ -63,6 +10,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                // Close mobile menu if open
+                nav.classList.remove('active');
+                menuToggle?.classList.remove('active');
+                
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
     // Intersection Observer for scroll animations
     const observerOptions = {
         threshold: 0.1,
@@ -73,60 +42,108 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
+                // Unobserve after animation to prevent re-triggering
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    // Add elements to observe
-    const animateElements = document.querySelectorAll('.stat, .feature, .team-member-card, .news-item, .investor-logo, .contact-item');
-    
+    // Observe all elements with animate-on-scroll class
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
     animateElements.forEach(el => {
         observer.observe(el);
     });
 
-    // Parallax effect for floating shapes
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const shapes = document.querySelectorAll('.floating-shape');
-        
-        shapes.forEach((shape, index) => {
-            const speed = 0.5 + (index * 0.2);
-            shape.style.transform = `translateY(${scrolled * speed}px)`;
+    // Form handling
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = new FormData(this);
+            
+            // Basic validation passed (HTML5 handles required fields)
+            // In production, this would send to a server
+            alert('お問い合わせありがとうございます。\n内容を確認の上、担当者よりご連絡させていただきます。');
+            
+            // Reset form
+            this.reset();
         });
-    });
-
-    // Counter animation for stats
-    function animateCounter(element, target) {
-        let current = 0;
-        const increment = target / 100;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            element.textContent = Math.floor(current).toLocaleString();
-        }, 20);
     }
 
-    // Trigger counter animation when stats are visible
-    const statObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                entry.target.classList.add('counted');
-                const statValue = entry.target.querySelector('h3');
-                const targetValue = parseInt(statValue.textContent.replace(/[^0-9]/g, '')) || 100;
-                animateCounter(statValue, targetValue);
+    // Header shadow on scroll
+    const header = document.querySelector('.header');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
+            header.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.08)';
+        } else {
+            header.style.boxShadow = 'none';
+        }
+        
+        lastScroll = currentScroll;
+    });
+
+    // Add hover effect to domain items
+    const domainItems = document.querySelectorAll('.domain-item');
+    domainItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Parallax effect for hero section
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        });
+    }
+
+    // Stagger animation for feature cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+
+    // Active nav link highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav a[href^="#"]');
+    
+    function highlightNavLink() {
+        const scrollY = window.pageYOffset;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${sectionId}`) {
+                        item.classList.add('active');
+                    }
+                });
             }
         });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.stat').forEach(stat => {
-        statObserver.observe(stat);
-    });
+    }
+    
+    window.addEventListener('scroll', highlightNavLink);
+    highlightNavLink(); // Call on load
 });
 
-// Add loading animation for images
+// Add loading complete class to body
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
 });
