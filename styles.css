@@ -152,9 +152,10 @@ h4 {
 }
 
 .logo span {
-    background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
+    background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-lavender) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 900;
 }
 
 .nav {
@@ -184,9 +185,10 @@ h4 {
     bottom: -5px;
     left: 0;
     width: 0;
-    height: 2px;
-    background: var(--accent-lavender);
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
     transition: var(--transition);
+    border-radius: 2px;
 }
 
 .nav a:hover::after {
@@ -217,7 +219,7 @@ h4 {
     padding: 140px 0 80px;
     position: relative;
     overflow: hidden;
-    background: var(--main-bg);
+    background: linear-gradient(180deg, rgba(233, 223, 255, 0.3) 0%, rgba(252, 228, 236, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
 }
 
 .hero-bg {
@@ -294,9 +296,22 @@ h4 {
 }
 
 .btn-primary {
-    background: var(--text-primary);
-    color: var(--main-bg);
+    background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
+    color: var(--text-primary);
     box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-lavender) 100%);
+    transition: left 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -304,14 +319,24 @@ h4 {
     box-shadow: var(--shadow-lg);
 }
 
+.btn-primary:hover::before {
+    left: 0;
+}
+
+.btn-primary span {
+    position: relative;
+    z-index: 1;
+}
+
 .btn-secondary {
     background: var(--main-bg);
     color: var(--text-primary);
-    border: 2px solid var(--border-light);
+    border: 2px solid var(--accent-lavender);
 }
 
 .btn-secondary:hover {
-    background: var(--sub-bg);
+    background: var(--accent-lavender);
+    border-color: var(--accent-lavender);
 }
 
 /* Message Section */
@@ -365,7 +390,7 @@ h4 {
 /* Mission Vision Values */
 .mvv {
     padding: 80px 0;
-    background: var(--sub-bg);
+    background: linear-gradient(180deg, var(--sub-bg) 0%, rgba(233, 223, 255, 0.15) 100%);
 }
 
 .mvv-grid {
@@ -382,11 +407,31 @@ h4 {
     text-align: center;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    border: 1px solid rgba(233, 223, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.mvv-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(233, 223, 255, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .mvv-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
+    border-color: var(--accent-lavender);
+}
+
+.mvv-item:hover::before {
+    opacity: 1;
 }
 
 .mvv-label {
@@ -471,8 +516,9 @@ h4 {
 
 .ceo-text {
     padding: 40px;
-    background: var(--sub-bg);
+    background: linear-gradient(135deg, rgba(233, 223, 255, 0.08) 0%, rgba(252, 228, 236, 0.08) 100%);
     border-radius: var(--radius-md);
+    border: 1px solid rgba(233, 223, 255, 0.15);
 }
 
 .ceo-quote {
@@ -595,10 +641,31 @@ h4 {
     background: var(--sub-bg);
     border-radius: var(--radius-md);
     transition: var(--transition);
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.domain-item::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
+    border-radius: var(--radius-md);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .domain-item:hover {
-    background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
+    background: var(--main-bg);
+    transform: translateY(-3px);
+}
+
+.domain-item:hover::before {
+    opacity: 1;
 }
 
 .domain-icon {
@@ -625,7 +692,7 @@ h4 {
 /* Features */
 .features {
     padding: 80px 0;
-    background: var(--sub-bg);
+    background: linear-gradient(180deg, rgba(252, 228, 236, 0.15) 0%, var(--sub-bg) 100%);
 }
 
 .features-grid {
@@ -644,9 +711,31 @@ h4 {
     transition: var(--transition);
 }
 
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(233, 223, 255, 0) 0%, rgba(252, 228, 236, 0) 100%);
+    transition: var(--transition);
+    opacity: 0;
+}
+
 .feature-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
+}
+
+.feature-card:hover::before {
+    background: linear-gradient(135deg, rgba(233, 223, 255, 0.1) 0%, rgba(252, 228, 236, 0.1) 100%);
+    opacity: 1;
 }
 
 .feature-icon {
@@ -693,11 +782,12 @@ h4 {
 .management-card {
     max-width: 600px;
     margin: 60px auto 0;
-    background: var(--sub-bg);
+    background: linear-gradient(135deg, rgba(252, 228, 236, 0.1) 0%, rgba(233, 223, 255, 0.1) 100%);
     padding: 48px;
     border-radius: var(--radius-lg);
     text-align: center;
     box-shadow: var(--shadow-md);
+    border: 1px solid rgba(233, 223, 255, 0.2);
 }
 
 .management-photo {
@@ -787,10 +877,11 @@ h4 {
 }
 
 .contact-form {
-    background: var(--sub-bg);
+    background: linear-gradient(135deg, rgba(233, 223, 255, 0.2) 0%, rgba(252, 228, 236, 0.2) 100%);
     padding: 48px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(233, 223, 255, 0.3);
 }
 
 .form-group {
@@ -826,6 +917,7 @@ h4 {
 .form-textarea:focus {
     outline: none;
     border-color: var(--accent-lavender);
+    background: rgba(233, 223, 255, 0.05);
 }
 
 .form-textarea {
@@ -836,12 +928,12 @@ h4 {
 .form-submit {
     width: 100%;
     padding: 18px;
-    background: var(--text-primary);
-    color: var(--main-bg);
+    background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-lavender) 100%);
+    color: var(--text-primary);
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: 50px;
     font-size: 1.125rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
     box-shadow: var(--shadow-md);
@@ -850,6 +942,7 @@ h4 {
 .form-submit:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--accent-lavender) 0%, var(--accent-pink) 100%);
 }
 
 .contact-info {
